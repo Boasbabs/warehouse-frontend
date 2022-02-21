@@ -1,16 +1,10 @@
 import { Layout } from './base-components';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <Layout>
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          
-        </header>
-      </div>
+      <Outlet />
     </Layout>
   );
 }
