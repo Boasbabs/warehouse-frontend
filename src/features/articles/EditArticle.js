@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { updateArticle } from './redux/articlesSlice';
+import { updateArticle } from './redux/articlesThunk';
 
 const EditArticle = () => {
   const { articleId } = useParams();
@@ -35,7 +35,7 @@ const EditArticle = () => {
   const handleSubmit = () => {
     if (name && amountInStock) {
       dispatch(updateArticle({ id: article.id, name, amountInStock }));
-      navigate(`/articles`);
+    //   navigate(`/articles`);
     }
   };
 

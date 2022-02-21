@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getArticles } from './articlesThunk';
+import { getArticles, updateArticle } from './articlesThunk';
 
 export const articlesSlice = createSlice({
   name: 'articles',
@@ -38,17 +38,17 @@ export const articlesSlice = createSlice({
         ...state,
         articles: [...state.articles, action.payload]
       };
-    },
-    updateArticle(state, action) {
-      const { id, name, amountInStock } = action.payload;
-      const existingArticle = state.articles.find(
-        (article) => article.id === id
-      );
-      if (existingArticle) {
-        existingArticle.name = name;
-        existingArticle.amountInStock = amountInStock;
-      }
     }
+    // updateArticle(state, action) {
+    //   const { id, name, amountInStock } = action.payload;
+    //   const existingArticle = state.articles.find(
+    //     (article) => article.id === id
+    //   );
+    //   if (existingArticle) {
+    //     existingArticle.name = name;
+    //     existingArticle.amountInStock = amountInStock;
+    //   }
+    // }
   },
   extraReducers: {
     [getArticles.pending]: (state) => {
@@ -60,11 +60,23 @@ export const articlesSlice = createSlice({
     },
     [getArticles.rejected]: (state) => {
       state.status = 'failed';
+    },
+
+    [updateArticle.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [updateArticle.fulfilled]: (state, action) => {
+      state.status = 'success';
+      // state.articles = action.payload;
+      console.log("action.payload;", action.payload)
+    },
+    [updateArticle.rejected]: (state) => {
+      state.status = 'failed';
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { addArticle, updateArticle } = articlesSlice.actions;
+export const { addArticle } = articlesSlice.actions;
 
 export default articlesSlice.reducer;
