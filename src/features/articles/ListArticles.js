@@ -1,10 +1,4 @@
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  Stack,
-} from '@chakra-ui/react';
+import { Box, Container, Heading, Text, Stack } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
@@ -21,7 +15,7 @@ const Articles = () => {
   ));
 
   useEffect(() => {
-    dispatch(getArticles());
+    // dispatch(getArticles());
   }, [dispatch]);
 
   return (
@@ -33,7 +27,9 @@ const Articles = () => {
         mb={6}
         textAlign={'center'}
       >
-        <Heading fontSize={'3xl'}>Articles</Heading>
+        <Heading fontSize={'3xl'} fontWeight="light">
+          Articles
+        </Heading>
         <Text color={'gray.600'} fontSize={'xl'}>
           {status}
         </Text>
