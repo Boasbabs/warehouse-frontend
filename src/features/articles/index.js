@@ -5,7 +5,7 @@ import SingleArticle from './SingleArticle';
 const Articles = () => {
   return (
     <>
-      <AddArticle />
+      {/* <AddArticle /> */}
       <ListArticles />
     </>
   );

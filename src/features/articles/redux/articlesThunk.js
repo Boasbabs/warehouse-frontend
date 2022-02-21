@@ -10,7 +10,11 @@ export const getArticles = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      if(error.response?.status) {
+        return []
+      }
+      console.log(error.response?.data?.message ||
+        error.message);
     }
   }
 );

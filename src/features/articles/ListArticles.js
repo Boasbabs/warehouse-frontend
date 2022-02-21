@@ -1,29 +1,23 @@
-import { useEffect } from "react";
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  Stack,
+} from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import { getArticles } from './redux/articlesThunk';
+
+import { ArticlesTable, ArticlesTableRow } from './components';
 
 const Articles = () => {
   const dispatch = useDispatch();
   const { articles, status } = useSelector((state) => state.articles);
 
   const renderedArticles = articles.map((article) => (
-    <article className="articles-excerpt" key={article.id}>
-      <h3>{article.name}</h3>
-      <p className="articles-content">{article.amountInStock}</p>
-      <Link
-        style={{ display: 'block', margin: '1rem 0' }}
-        to={`/articles/${article.id}`}
-      >
-        View
-      </Link>
-      <Link
-        style={{ display: 'block', margin: '1rem 0' }}
-        to={`/editArticle/${article.id}`}
-      >
-        Edit
-      </Link>
-    </article>
+    <ArticlesTableRow key={article.id} article={article} />
   ));
 
   useEffect(() => {
@@ -31,12 +25,24 @@ const Articles = () => {
   }, [dispatch]);
 
   return (
-    <section>
-      <h1>Articles...{status}</h1>
-      <div>{renderedArticles}</div>
+    <Box p={4}>
+      <Stack
+        spacing={4}
+        as={Container}
+        maxW={'3xl'}
+        mb={6}
+        textAlign={'center'}
+      >
+        <Heading fontSize={'3xl'}>Articles</Heading>
+        <Text color={'gray.600'} fontSize={'xl'}>
+          {status}
+        </Text>
+      </Stack>
+
+      <ArticlesTable>{renderedArticles}</ArticlesTable>
       <hr />
       <Outlet />
-    </section>
+    </Box>
   );
 };
 
