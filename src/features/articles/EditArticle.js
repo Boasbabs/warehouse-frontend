@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { updateArticle } from './articlesSlice';
+import { updateArticle } from './redux/articlesSlice';
 
 const EditArticle = () => {
   const { articleId } = useParams();
 
-  const article = useSelector((state) =>
-    state.articles.find((article) => article.id === articleId)
+  const article = useSelector(({ articles }) =>
+    articles.articles.find((article) => article.id === articleId)
   );
   const [name, setName] = useState(article.name);
   const [amountInStock, setAmountInStock] = useState(article.amountInStock);

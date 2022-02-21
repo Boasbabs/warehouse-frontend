@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 const SingleArticle = () => {
   const { articleId } = useParams();
 
-  const article = useSelector((state) =>
-    state.articles.find((article) => article.id === articleId)
+  const article = useSelector(({articles}) =>
+    articles.articles.find((article) => article.id === articleId)
   );
 
   if (!article) {

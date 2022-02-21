@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addArticle } from './articlesSlice';
+import { addArticle } from './redux/articlesSlice';
 
 const AddArticle = () => {
   const [name, setName] = useState('');

@@ -1,8 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
+import { getArticles } from './redux/articlesThunk';
 
 const Articles = () => {
-  const articles = useSelector((state) => state.articles);
+  const dispatch = useDispatch();
+  const { articles, status } = useSelector((state) => state.articles);
 
   const renderedArticles = articles.map((article) => (
     <article className="articles-excerpt" key={article.id}>
@@ -23,10 +26,15 @@ const Articles = () => {
     </article>
   ));
 
+  useEffect(() => {
+    dispatch(getArticles());
+  }, [dispatch]);
+
   return (
     <section>
-      <h1>Articles...</h1>
+      <h1>Articles...{status}</h1>
       <div>{renderedArticles}</div>
+      <hr />
       <Outlet />
     </section>
   );
