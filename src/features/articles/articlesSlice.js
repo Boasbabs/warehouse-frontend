@@ -33,11 +33,19 @@ export const articlesSlice = createSlice({
     // immutable state based off those changes
     addArticle(state, action) {
       state.push(action.payload);
+    },
+    updateArticle(state, action) {
+      const { id, name, amountInStock } = action.payload
+      const existingArticle = state.find(article => article.id === id)
+      if (existingArticle) {
+        existingArticle.name = name
+        existingArticle.amountInStock = amountInStock
+      }
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { addArticle } = articlesSlice.actions;
+export const { addArticle, updateArticle } = articlesSlice.actions;
 
 export default articlesSlice.reducer;

@@ -8,8 +8,17 @@ const Articles = () => {
     <article className="articles-excerpt" key={article.id}>
       <h3>{article.name}</h3>
       <p className="articles-content">{article.amountInStock}</p>
-      <Link style={{ display: "block", margin: "1rem 0" }} to={`/articles/${article.id}`} className="button muted-button">
-        View article
+      <Link
+        style={{ display: 'block', margin: '1rem 0' }}
+        to={`/articles/${article.id}`}
+      >
+        View
+      </Link>
+      <Link
+        style={{ display: 'block', margin: '1rem 0' }}
+        to={`/editArticle/${article.id}`}
+      >
+        Edit
       </Link>
     </article>
   ));

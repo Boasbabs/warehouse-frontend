@@ -4,6 +4,7 @@ import App from './App';
 import { Articles } from 'features';
 import { NotFound } from './base-components';
 import SingleArticle from 'features/articles/SingleArticle';
+import EditArticle from 'features/articles/EditArticle';
 
 const AppRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const AppRoutes = () => {
           <Route path="articles" element={<Articles />}>
             <Route path=":articleId" element={<SingleArticle />} />
           </Route>
+          <Route path="/editArticle/:articleId" element={<EditArticle />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
