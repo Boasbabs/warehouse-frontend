@@ -14,6 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { Link } from 'react-router-dom';
 
 import { updateArticle } from './redux/articlesThunk';
 import validationSchema from './validations/validationSchema';
@@ -59,7 +60,15 @@ const EditArticle = () => {
           Edit Article
         </Heading>
         <Text color={'gray.600'} fontSize={'xl'}>
-          status
+        <Button
+            as={Link}
+            to={`/articles`}
+            colorScheme="blackAlpha"
+            variant={'link'}
+            size="sm"
+          >
+           	&#8592; Back to Articles
+          </Button>
         </Text>
       </Stack>
       <Box bg="white" borderRadius="md">

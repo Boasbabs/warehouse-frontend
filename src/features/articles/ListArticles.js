@@ -1,7 +1,6 @@
 import { Box, Container, Heading, Text, Stack } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
 import { getArticles } from './redux/articlesThunk';
 
 import { ArticlesTable, ArticlesTableRow } from './components';
@@ -36,8 +35,7 @@ const Articles = () => {
       </Stack>
 
       <ArticlesTable>{renderedArticles}</ArticlesTable>
-      <hr />
-      <Outlet />
+
     </Box>
   );
 };

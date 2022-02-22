@@ -11,9 +11,8 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="articles" element={<Articles />}>
-            <Route path=":articleId" element={<SingleArticle />} />
-          </Route>
+          <Route path="articles" element={<Articles />}/>
+          <Route path="/articles/:articleId" element={<SingleArticle />} />
           <Route path="/editArticle/:articleId" element={<EditArticle />} />
           <Route path="*" element={<NotFound />} />
         </Route>
