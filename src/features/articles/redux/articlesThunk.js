@@ -36,13 +36,30 @@ export const updateArticle = createAsyncThunk(
         toast.error('Server error. Try again later');
         return null;
       }
-      toast.error(
-        error.response?.data?.message ||
-          error.message ||
-          'Something went wrong!'
-      );
+    }
+  }
+);
 
-      console.log(error.response?.data?.message || error.message);
+export const deleteArticle = createAsyncThunk(
+  'articles/deleteArticle',
+  async (params) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:7000/articles/${params.id}`
+      );
+      toast.success('Article delete successfully');
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 503) {
+        toast.error('Server error. Try again later');
+        return null;
+      } else {
+        toast.error(
+          error.response?.data?.message ||
+            error.message ||
+            'Something went wrong!'
+        );
+      }
     }
   }
 );

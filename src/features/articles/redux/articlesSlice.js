@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getArticles, updateArticle } from './articlesThunk';
+import { getArticles, updateArticle, deleteArticle } from './articlesThunk';
 
 export const articlesSlice = createSlice({
   name: 'articles',
@@ -71,6 +71,15 @@ export const articlesSlice = createSlice({
       console.log("action.payload;", action.payload)
     },
     [updateArticle.rejected]: (state) => {
+      state.status = 'failed';
+    },
+     [deleteArticle.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [deleteArticle.fulfilled]: (state, action) => {
+      state.status = 'success';
+    },
+    [deleteArticle.rejected]: (state) => {
       state.status = 'failed';
     }
   }

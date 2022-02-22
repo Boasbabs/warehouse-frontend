@@ -9,25 +9,35 @@ import {
   FormControl,
   List,
   ListItem,
-  FormHelperText,
+  FormHelperText
 } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+
+import { deleteArticle } from './redux/articlesThunk';
 
 const SingleArticle = () => {
   const { articleId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const article = useSelector(({ articles }) =>
     articles.articles.find((article) => article.id === articleId)
   );
 
-  if (!article) {
-    return (
-      <Container>
-        <h2>Article not found!</h2>
-      </Container>
-    );
-  }
+  const handleDelete = async () => {
+    let check = window.confirm("Do you want to delete article??");
+    if(check) {
+      const response = await dispatch(
+        deleteArticle({
+          id: article.id
+        })
+      );
+      if(response) {
+        navigate(`/articles`);
+      }
+    }
+  };
 
   return (
     <Container maxW="full" mt={0} centerContent={true} overflow="hidden">
@@ -55,7 +65,12 @@ const SingleArticle = () => {
       </Stack>
       <Box bg="white" borderRadius="md">
         <Box m={8} color="gray.800">
-          <VStack textAlign={'center'} justifyContent={'center'} w={400} spacing={5}>
+          <VStack
+            textAlign={'center'}
+            justifyContent={'center'}
+            w={400}
+            spacing={5}
+          >
             <Box>
               <Text
                 fontSize={{ base: '16px', lg: '18px' }}
@@ -67,6 +82,11 @@ const SingleArticle = () => {
                 Article Details
               </Text>
 
+              {
+                
+                (!article) ? <Heading fontSize={'1xl'} fontWeight="light">
+                No article found :(
+              </Heading> :
               <List spacing={4}>
                 <ListItem>
                   <Text
@@ -89,24 +109,24 @@ const SingleArticle = () => {
                   {article.amountInStock}
                 </ListItem>
                 <ListItem>
-                <FormControl id="submit">
-                  <Button
-                    colorScheme="red"
-                    variant="outline"
-                    size="sm"
-                    // onClick={""}
-                    // isDisabled={""}
-                  >
-                    Delete article
-                  </Button>
-                  <FormHelperText color="red.200">
-                   WARNING: Action is irreversible
-                  </FormHelperText>
+                  <FormControl id="submit">
+                    <Button
+                      colorScheme="red"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleDelete}
+                    >
+                      Delete article
+                    </Button>
+                    <FormHelperText color="red.200">
+                      WARNING: Action is irreversible
+                    </FormHelperText>
                   </FormControl>
                 </ListItem>
               </List>
+              }
+
             </Box>
-           
           </VStack>
         </Box>
       </Box>
