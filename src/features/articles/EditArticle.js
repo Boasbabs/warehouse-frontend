@@ -8,14 +8,15 @@ import {
   VStack,
   FormControl,
   FormLabel,
+  FormHelperText,
   Input
 } from '@chakra-ui/react';
-
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
 
 import { updateArticle } from './redux/articlesThunk';
+import validationSchema from './validations/validationSchema';
 
 const EditArticle = () => {
   const { articleId } = useParams();
@@ -23,21 +24,27 @@ const EditArticle = () => {
   const article = useSelector(({ articles }) =>
     articles.articles.find((article) => article.id === articleId)
   );
-  const [name, setName] = useState(article.name);
-  const [amountInStock, setAmountInStock] = useState(article.amountInStock);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleAmountChange = (e) => setAmountInStock(e.target.value);
-
-  const handleSubmit = () => {
-    if (name && amountInStock) {
-      dispatch(updateArticle({ id: article.id, name, amountInStock }));
-    //   navigate(`/articles`);
+  const formik = useFormik({
+    initialValues: {
+      name: article?.name || '',
+      amountInStock: article?.amountInStock || '',
+    },
+    validationSchema: validationSchema.editArticleSchema,
+    onSubmit: async (values, { resetForm }) => {
+      await dispatch(
+        updateArticle({
+          id: article.id,
+          name: values.name,
+          amountInStock: parseInt(values.amountInStock)
+        })
+      );
+      resetForm();
+      navigate(`/articles`);
     }
-  };
+  });
 
   return (
     <Container maxW="full" mt={0} centerContent={true} overflow="hidden">
@@ -57,32 +64,44 @@ const EditArticle = () => {
       </Stack>
       <Box bg="white" borderRadius="md">
         <Box m={8} color="gray.800">
-          <VStack spacing={5}>
+          <VStack w={400} spacing={5}>
             <FormControl id="name">
               <FormLabel>Name:</FormLabel>
               <Input
                 type="text"
                 id="name"
                 name="name"
-                value={name}
-                onChange={handleNameChange}
+                {...formik.getFieldProps('name')}
                 size="md"
               />
+              {formik.touched.name && formik.errors.name ? (
+                <FormHelperText color="red.500">
+                  {formik.errors.name}
+                </FormHelperText>
+              ) : null}
             </FormControl>
             <FormControl id="amountInStock">
               <FormLabel>Amount in stock:</FormLabel>
               <Input
                 type="number"
                 id="amountInStock"
-                name="amountInStock"
-                value={amountInStock}
-                onChange={handleAmountChange}
+                {...formik.getFieldProps('amountInStock')}
                 size="md"
               />
+              {formik.touched.amountInStock && formik.errors.amountInStock ? (
+                <FormHelperText color="red.500">
+                  {formik.errors.amountInStock}
+                </FormHelperText>
+              ) : null}
             </FormControl>
 
             <FormControl id="submit" float="right">
-              <Button colorScheme="blackAlpha" size="sm" onClick={handleSubmit}>
+              <Button
+                colorScheme="blackAlpha"
+                size="sm"
+                onClick={formik.handleSubmit}
+                isDisabled={formik.errors.amountInStock || formik.errors.name}
+              >
                 Update
               </Button>
             </FormControl>
