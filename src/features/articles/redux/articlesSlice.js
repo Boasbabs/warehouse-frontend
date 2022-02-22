@@ -26,6 +26,7 @@ export const articlesSlice = createSlice({
         amountInStock: 1
       }
     ],
+    singleArticle: {},
     status: null
   },
   reducers: {
@@ -39,16 +40,6 @@ export const articlesSlice = createSlice({
         articles: [...state.articles, action.payload]
       };
     }
-    // updateArticle(state, action) {
-    //   const { id, name, amountInStock } = action.payload;
-    //   const existingArticle = state.articles.find(
-    //     (article) => article.id === id
-    //   );
-    //   if (existingArticle) {
-    //     existingArticle.name = name;
-    //     existingArticle.amountInStock = amountInStock;
-    //   }
-    // }
   },
   extraReducers: {
     [getArticles.pending]: (state) => {
@@ -67,8 +58,7 @@ export const articlesSlice = createSlice({
     },
     [updateArticle.fulfilled]: (state, action) => {
       state.status = 'success';
-      // state.articles = action.payload;
-      console.log("action.payload;", action.payload)
+      state.singleArticle = action.payload;
     },
     [updateArticle.rejected]: (state) => {
       state.status = 'failed';
@@ -85,7 +75,6 @@ export const articlesSlice = createSlice({
   }
 });
 
-// Action creators are generated for each case reducer function
 export const { addArticle } = articlesSlice.actions;
 
 export default articlesSlice.reducer;

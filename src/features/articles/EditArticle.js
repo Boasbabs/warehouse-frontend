@@ -21,12 +21,12 @@ import validationSchema from './validations/validationSchema';
 
 const EditArticle = () => {
   const { articleId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const article = useSelector(({ articles }) =>
     articles.articles.find((article) => article.id === articleId)
   );
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
