@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { createProduct } from './redux/productsThunk';
 
-import ProductSubForm from './components/ProductSubForm';
+import { ProductSubForm } from './components';
 
 const FORM_INITIAL_VALUES = {
   name: '',

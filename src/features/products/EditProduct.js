@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { updateProduct } from './redux/productsThunk';
 
-import ProductSubForm from './components/ProductSubForm';
+import { ProductSubForm } from './components';
 
 const EditProduct = () => {
   const { productId } = useParams();
