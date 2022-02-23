@@ -71,3 +71,28 @@ export const deleteArticle = createAsyncThunk(
     }
   }
 );
+
+export const createArticle = createAsyncThunk(
+  'articles/createArticle',
+  async (params) => {
+    try {
+      const response = await axios.post(`http://localhost:7000/articles/`, {
+        name: params.name,
+        amountInStock: params.amountInStock
+      });
+      toast.success('Article added successfully');
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 503) {
+        toast.error('Server error. Try again later');
+        return [];
+      } else {
+        toast.error(
+          error.response?.data?.message ||
+            error.message ||
+            'Something went wrong!'
+        );
+      }
+    }
+  }
+);

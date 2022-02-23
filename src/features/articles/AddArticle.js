@@ -1,55 +1,115 @@
-import { useState } from 'react';
+import {
+  Container,
+  Box,
+  Heading,
+  Text,
+  Stack,
+  Button,
+  VStack,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Input
+} from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
-import { addArticle } from './redux/articlesSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import validationSchema from './validations/validationSchema';
+import { createArticle } from './redux/articlesThunk';
 
 const AddArticle = () => {
-  const [name, setName] = useState('');
-  const [amountInStock, setAmountInStock] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleAmountChange = (e) => setAmountInStock(e.target.value);
-
-  const handleSubmit = () => {
-    if (name && amountInStock) {
-      dispatch(
-        addArticle({
-          id: Math.random(),
-          name,
-          amountInStock
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      amountInStock: ''
+    },
+    validationSchema: validationSchema.editArticleSchema,
+    onSubmit: async (values, { resetForm }) => {
+      await dispatch(
+        createArticle({
+          name: values.name,
+          amountInStock: parseInt(values.amountInStock)
         })
-      );
-
-      setName('');
-      setAmountInStock('');
+      )
+      resetForm();
+      navigate(`/articles`);
     }
-  };
+  });
 
   return (
-    <section>
-      <h2>Add a New Post</h2>
-      <form>
-        <label htmlFor="postTitle">Post Title:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
-        />
-        <label htmlFor="postContent">Content:</label>
-        <input
-          type="number"
-          id="amountInStock"
-          name="amountInStock"
-          value={amountInStock}
-          onChange={handleAmountChange}
-        />
-        <button type="button" onClick={handleSubmit}>
-          Save Post
-        </button>
-      </form>
-    </section>
+    <Container maxW="full" mt={0} centerContent={true} overflow="hidden">
+      <Stack
+        spacing={4}
+        as={Container}
+        maxW={'3xl'}
+        mb={6}
+        textAlign={'center'}
+      >
+        <Heading fontSize={'3xl'} fontWeight="light">
+          Add Article
+        </Heading>
+        <Text color={'gray.600'} fontSize={'xl'}>
+          <Button
+            as={Link}
+            to={`/articles`}
+            colorScheme="blackAlpha"
+            variant={'link'}
+            size="sm"
+          >
+            &#8592; Back to Articles
+          </Button>
+        </Text>
+      </Stack>
+      <Box bg="white" borderRadius="md">
+        <Box m={8} color="gray.800">
+          <VStack w={400} spacing={5}>
+            <FormControl id="name">
+              <FormLabel>Name:</FormLabel>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                {...formik.getFieldProps('name')}
+                size="md"
+              />
+              {formik.touched.name && formik.errors.name ? (
+                <FormHelperText color="red.500">
+                  {formik.errors.name}
+                </FormHelperText>
+              ) : null}
+            </FormControl>
+            <FormControl id="amountInStock">
+              <FormLabel>Amount in stock:</FormLabel>
+              <Input
+                type="number"
+                id="amountInStock"
+                {...formik.getFieldProps('amountInStock')}
+                size="md"
+              />
+              {formik.touched.amountInStock && formik.errors.amountInStock ? (
+                <FormHelperText color="red.500">
+                  {formik.errors.amountInStock}
+                </FormHelperText>
+              ) : null}
+            </FormControl>
+
+            <FormControl id="submit" float="right">
+              <Button
+                colorScheme="blackAlpha"
+                size="sm"
+                onClick={formik.handleSubmit}
+                isDisabled={formik.errors.amountInStock || formik.errors.name}
+              >
+                Create Article
+              </Button>
+            </FormControl>
+          </VStack>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
