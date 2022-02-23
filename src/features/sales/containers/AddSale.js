@@ -14,23 +14,12 @@ import {
 } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { Formik, useFormik, ErrorMessage } from 'formik';
+import { useFormik } from 'formik';
 
 import { useNavigate, Link } from 'react-router-dom';
 import { createSale } from '../redux/salesThunk';
-import { SaleSubForm } from '../components';
 import { getProducts } from 'features/products/redux/productsThunk';
 import validationSchema from '../validations/validationSchema';
-
-const FORM_INITIAL_VALUES = {
-  name: '',
-  articles: [
-    {
-      id: '',
-      amountRequired: 0
-    }
-  ]
-};
 
 const AddSale = () => {
   const dispatch = useDispatch();
@@ -47,7 +36,7 @@ const AddSale = () => {
     onSubmit: async (values, { resetForm }) => {
       await dispatch(
         createSale({
-          productId: values.name,
+          productId: values.productId,
           amountSold: parseInt(values.amountSold)
         })
       );

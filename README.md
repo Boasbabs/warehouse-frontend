@@ -48,4 +48,4 @@ to generate the scaffolding for this app.
 ## Requirements
 
 - List the available products and quantities and the articles in each product.
-- ❗The user should be able to register a sale. (Unable to make a POST request to the sale is broken)
+- ❗The user should be able to register a sale.

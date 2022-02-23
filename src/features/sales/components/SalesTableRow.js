@@ -6,12 +6,17 @@ const SalesTableRow = ({ sale }) => {
     <Tr key={sale.id}>
       <Td>
         <Text fontSize={{ base: '12px', lg: '14px' }} fontWeight={'500'}>
-         {sale.name}
+          {new Date(sale.createdAt).toDateString()}
         </Text>
       </Td>
       <Td>
-        <Text fontSize={{ base: '14px', lg: '16px' }} fontWeight={'600'}>
-          {sale.articles?.length}
+        <Text fontSize={{ base: '12px', lg: '14px' }} fontWeight={'500'}>
+          {sale.productId}
+        </Text>
+      </Td>
+      <Td>
+        <Text fontSize={{ base: '12px', lg: '14px' }} fontWeight={'500'}>
+          {sale.amountSold}
         </Text>
       </Td>
       <Td>

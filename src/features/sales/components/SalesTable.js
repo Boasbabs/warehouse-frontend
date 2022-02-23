@@ -14,7 +14,7 @@ const SalesTable = ({ sales }) => {
   const renderedSales =
     !sales || sales.length < 1 ? (
       <Tr>
-        <Td colSpan={3} textAlign="center">
+        <Td colSpan={4} textAlign="center">
           No sales found
         </Td>
       </Tr>
@@ -27,16 +27,18 @@ const SalesTable = ({ sales }) => {
       <TableCaption>Sales in the Warehouse</TableCaption>
       <Thead>
         <Tr>
-          <Th>Sale</Th>
-          <Th>No. of Articles</Th>
+          <Th>Date</Th>
+          <Th>Product</Th>
+          <Th>Amount Sold</Th>
           <Th>Action</Th>
         </Tr>
       </Thead>
       <Tbody>{renderedSales}</Tbody>
       <Tfoot>
         <Tr>
-          <Th>Sale</Th>
-          <Th>No. of Articles</Th>
+          <Th>Date</Th>
+          <Th>Product</Th>
+          <Th>Amount Sold</Th>
           <Th>Action</Th>
         </Tr>
       </Tfoot>
