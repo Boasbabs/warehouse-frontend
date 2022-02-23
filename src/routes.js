@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App';
-import { Articles, ListProducts, SingleProduct } from 'features';
+import { Articles, ListProducts, SingleProduct, EditProduct } from 'features';
 import { NotFound } from './base-components';
 import SingleArticle from 'features/articles/SingleArticle';
 import EditArticle from 'features/articles/EditArticle';
@@ -19,7 +19,8 @@ const AppRoutes = () => {
 
           <Route path="products" element={<ListProducts />} />
           <Route path="/products/:productId" element={<SingleProduct />} />
-          
+          <Route path="/product/edit/:productId" element={<EditProduct />} />
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

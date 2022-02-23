@@ -29,7 +29,7 @@ export const updateProduct = createAsyncThunk(
     try {
       const response = await axios.patch(
         `http://localhost:7000/products/${params.id}`,
-        { name: params.name, amountInStock: params.amountInStock }
+        { ...params }
       );
       toast.success('Product updated successfully');
       return response.data;
