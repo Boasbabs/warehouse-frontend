@@ -27,7 +27,7 @@ const TableRows = ({ article }) => {
           </Button>
           <Button
             as={Link}
-            to={`/editArticle/${article.id}`}
+            to={`/article/edit/${article.id}`}
             colorScheme="blackAlpha"
             size="sm"
           >

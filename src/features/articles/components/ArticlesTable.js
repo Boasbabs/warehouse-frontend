@@ -5,10 +5,25 @@ import {
   Tfoot,
   Tr,
   Th,
+  Td,
   TableCaption
 } from '@chakra-ui/react';
+import ArticlesTableRow from './ArticlesTableRow';
 
-const ArticlesTable = ({ children }) => {
+const ArticlesTable = ({ articles }) => {
+  const renderedArticles =
+    !articles || articles.length < 1 ? (
+      <Tr>
+        <Td colSpan={3} textAlign="center">
+          No articles found
+        </Td>
+      </Tr>
+    ) : (
+      articles.map((article) => (
+        <ArticlesTableRow key={article.id} article={article} />
+      ))
+    );
+
   return (
     <Table size="sm" variant="striped" colorScheme="blackAlpha">
       <TableCaption>Articles in the Warehouse</TableCaption>
@@ -19,7 +34,7 @@ const ArticlesTable = ({ children }) => {
           <Th>Action</Th>
         </Tr>
       </Thead>
-      <Tbody>{children}</Tbody>
+      <Tbody>{renderedArticles}</Tbody>
       <Tfoot>
         <Tr>
           <Th>Article</Th>
