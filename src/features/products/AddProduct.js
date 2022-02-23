@@ -7,28 +7,28 @@ import {
   Button,
   VStack
 } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import { updateProduct } from './redux/productsThunk';
+import { useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import { createProduct } from './redux/productsThunk';
 
 import ProductSubForm from './components/ProductSubForm';
 
-const EditProduct = () => {
-  const { productId } = useParams();
+const FORM_INITIAL_VALUES = {
+  name: '',
+  articles: [
+    {
+      id: '',
+      amountRequired: 0
+    }
+  ]
+};
+
+const AddProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const product = useSelector(({ products }) =>
-    products.products.find((product) => product.id === productId)
-  );
-
   const handleSubmit = async (values) => {
-    await dispatch(
-      updateProduct({
-        id: product.id,
-        ...values
-      })
-    );
+    await dispatch(createProduct(values));
     navigate(`/products`);
   };
 
@@ -42,7 +42,7 @@ const EditProduct = () => {
         textAlign={'center'}
       >
         <Heading fontSize={'3xl'} fontWeight="light">
-          Edit Product
+          Add Product
         </Heading>
         <Text color={'gray.600'} fontSize={'xl'}>
           <Button
@@ -59,18 +59,12 @@ const EditProduct = () => {
       <Box bg="white" borderRadius="md">
         <Box m={8} color="gray.800">
           <VStack w={400} spacing={5}>
-            {product ? (
-              <ProductSubForm
-                name={product.name}
-                articles={product.articles}
-                submitFunc={handleSubmit}
-                isCreate={false}
-              />
-            ) : (
-              <Heading fontSize={'3xl'} fontWeight="light">
-                No product found
-              </Heading>
-            )}
+            <ProductSubForm
+              name={FORM_INITIAL_VALUES.name}
+              articles={FORM_INITIAL_VALUES.articles}
+              submitFunc={handleSubmit}
+              isCreate={true}
+            />
           </VStack>
         </Box>
       </Box>
@@ -78,4 +72,4 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default AddProduct;

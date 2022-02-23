@@ -77,8 +77,7 @@ export const createProduct = createAsyncThunk(
   async (params) => {
     try {
       const response = await axios.post(`http://localhost:7000/products/`, {
-        name: params.name,
-        amountInStock: params.amountInStock
+        ...params
       });
       toast.success('Product added successfully');
       return response.data;

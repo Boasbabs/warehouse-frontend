@@ -14,7 +14,7 @@ import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import { FiMinus, FiPlus } from 'react-icons/fi';
 import validationSchema from '../validations/validationSchema';
 
-const ProductSubForm = ({ name, articles, submitFunc }) => {
+const ProductSubForm = ({ name, articles, submitFunc, isCreate }) => {
   return (
     <FormControl>
       <Formik
@@ -42,7 +42,11 @@ const ProductSubForm = ({ name, articles, submitFunc }) => {
               render={(arrayHelpers) => (
                 <Stack spacing="5px">
                   {values.articles.map((article, index) => (
-                    <SimpleGrid templateColumns="repeat(2, 1fr)" spacing={1}>
+                    <SimpleGrid
+                      key={index}
+                      templateColumns="repeat(2, 1fr)"
+                      spacing={1}
+                    >
                       <Box>
                         <FormControl key={index}>
                           <FormLabel fontSize="12">Article Id</FormLabel>
@@ -56,6 +60,7 @@ const ProductSubForm = ({ name, articles, submitFunc }) => {
                           <FormLabel fontSize="12">Amount Required</FormLabel>
                           <Field
                             as={Input}
+                            type="number"
                             name={`articles.${index}.amountRequired`}
                           />
                           <ErrorMessage
@@ -99,7 +104,7 @@ const ProductSubForm = ({ name, articles, submitFunc }) => {
                 type="submit"
                 onClick={handleSubmit}
               >
-                Update
+                {isCreate ? 'Create' : 'Update'}
               </Button>
             </FormControl>
           </Form>

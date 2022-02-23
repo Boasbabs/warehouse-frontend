@@ -11,7 +11,7 @@ const ProductsTableRow = ({ product }) => {
       </Td>
       <Td>
         <Text fontSize={{ base: '14px', lg: '16px' }} fontWeight={'600'}>
-          {product.articles.length}
+          {product.articles?.length}
         </Text>
       </Td>
       <Td>

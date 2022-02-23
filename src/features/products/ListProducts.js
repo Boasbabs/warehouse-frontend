@@ -31,7 +31,7 @@ const ListProducts = () => {
         </Text>
         <Button
           as={Link}
-          to={`/article/add`}
+          to={`/product/add`}
           colorScheme="blackAlpha"
           variant={'outline'}
           size="sm"
