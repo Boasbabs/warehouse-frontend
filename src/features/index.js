@@ -7,3 +7,6 @@ export {
   EditProduct,
   AddProduct
 } from './products';
+
+// Sales pages
+export { ListSales } from './sales';
