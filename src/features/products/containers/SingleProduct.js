@@ -10,8 +10,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
-import { deleteProduct } from './redux/productsThunk';
-import { SingleProductItem } from './components';
+import { deleteProduct } from '../redux/productsThunk';
+import { SingleProductItem } from '../components';
 
 const SingleProduct = () => {
   const { productId } = useParams();

@@ -1,14 +1,6 @@
-import AddArticle from './AddArticle';
-import ListArticles from './ListArticles';
-import SingleArticle from './SingleArticle';
+export { default as AddArticle } from './containers/AddArticle';
+export { default as EditArticle } from './containers/EditArticle';
+export { default as ListArticles } from './containers/ListArticles';
+export { default as SingleArticle } from './containers/SingleArticle';
 
-const Articles = () => {
-  return (
-    <>
-      {/* <AddArticle /> */}
-      <ListArticles />
-    </>
-  );
-};
 
-export default Articles;

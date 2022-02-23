@@ -1,4 +1,10 @@
-export { default as Articles } from './articles';
+// Articles pages
+export {
+  ListArticles,
+  SingleArticle,
+  AddArticle,
+  EditArticle
+} from './articles';
 
 // Products pages
 export {

@@ -1,29 +1,37 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import App from './App';
-import { Articles, ListProducts, SingleProduct, EditProduct, AddProduct, ListSales, AddSale } from 'features';
 import { NotFound } from './base-components';
-import SingleArticle from 'features/articles/SingleArticle';
-import EditArticle from 'features/articles/EditArticle';
-import AddArticle from 'features/articles/AddArticle';
+import App from './App';
+import {
+  ListArticles,
+  SingleArticle,
+  EditArticle,
+  AddArticle,
+  ListProducts,
+  SingleProduct,
+  EditProduct,
+  AddProduct,
+  ListSales,
+  AddSale
+} from 'features';
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="articles" element={<Articles />} />
-          <Route path="/articles/:articleId" element={<SingleArticle />} />
-          <Route path="/article/edit/:articleId" element={<EditArticle />} />
-          <Route path="/article/add" element={<AddArticle />} />
+          <Route path="articles" index element={<ListArticles />} />
+          <Route path="articles/:articleId" element={<SingleArticle />} />
+          <Route path="article/edit/:articleId" element={<EditArticle />} />
+          <Route path="article/add" element={<AddArticle />} />
 
           <Route path="products" element={<ListProducts />} />
-          <Route path="/products/:productId" element={<SingleProduct />} />
-          <Route path="/product/edit/:productId" element={<EditProduct />} />
-          <Route path="/product/add" element={<AddProduct />} />
+          <Route path="products/:productId" element={<SingleProduct />} />
+          <Route path="product/edit/:productId" element={<EditProduct />} />
+          <Route path="product/add" element={<AddProduct />} />
 
           <Route path="sales" element={<ListSales />} />
-          <Route path="/sale/add" element={<AddSale />} />
+          <Route path="sale/add" element={<AddSale />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>

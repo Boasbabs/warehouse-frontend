@@ -1,17 +1,17 @@
 import { Box, Container, Heading, Text, Stack, Button } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSales } from './redux/salesThunk';
+import { getProducts } from '../redux/productsThunk';
 import { Link } from 'react-router-dom';
 
-import { SalesTable } from './components';
+import { ProductsTable } from '../components';
 
-const ListSales = () => {
+const ListProducts = () => {
   const dispatch = useDispatch();
-  const { sales, status } = useSelector((state) => state.sales);
+  const { products, status } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(getSales());
+    dispatch(getProducts());
   }, [dispatch]);
 
   return (
@@ -24,25 +24,25 @@ const ListSales = () => {
         textAlign={'center'}
       >
         <Heading fontSize={'3xl'} fontWeight="light">
-          Sales
+          Products
         </Heading>
         <Text color={'gray.600'} fontSize={'xl'}>
           {status}
         </Text>
         <Button
           as={Link}
-          to={`/sale/add`}
+          to={`/product/add`}
           colorScheme="blackAlpha"
           variant={'outline'}
           size="sm"
         >
-          &#43; Add Sales
+          &#43; Add Products
         </Button>
       </Stack>
 
-      <SalesTable sales={sales} />
+      <ProductsTable products={products} />
     </Box>
   );
 };
 
-export default ListSales;
+export default ListProducts;

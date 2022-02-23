@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
-import { deleteArticle } from './redux/articlesThunk';
+import { deleteArticle } from '../redux/articlesThunk';
 
 const SingleArticle = () => {
   const { articleId } = useParams();

@@ -11,29 +11,36 @@ import {
   FormHelperText,
   Input
 } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-import validationSchema from './validations/validationSchema';
-import { createArticle } from './redux/articlesThunk';
 
-const AddArticle = () => {
+import { updateArticle } from '../redux/articlesThunk';
+import validationSchema from '../validations/validationSchema';
+
+const EditArticle = () => {
+  const { articleId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const article = useSelector(({ articles }) =>
+    articles.articles.find((article) => article.id === articleId)
+  );
+
   const formik = useFormik({
     initialValues: {
-      name: '',
-      amountInStock: ''
+      name: article?.name || '',
+      amountInStock: article?.amountInStock || '',
     },
     validationSchema: validationSchema.editArticleSchema,
     onSubmit: async (values, { resetForm }) => {
       await dispatch(
-        createArticle({
+        updateArticle({
+          id: article.id,
           name: values.name,
           amountInStock: parseInt(values.amountInStock)
         })
-      )
+      );
       resetForm();
       navigate(`/articles`);
     }
@@ -49,17 +56,17 @@ const AddArticle = () => {
         textAlign={'center'}
       >
         <Heading fontSize={'3xl'} fontWeight="light">
-          Add Article
+          Edit Article
         </Heading>
         <Text color={'gray.600'} fontSize={'xl'}>
-          <Button
+        <Button
             as={Link}
             to={`/articles`}
             colorScheme="blackAlpha"
             variant={'link'}
             size="sm"
           >
-            &#8592; Back to Articles
+           	&#8592; Back to Articles
           </Button>
         </Text>
       </Stack>
@@ -103,7 +110,7 @@ const AddArticle = () => {
                 onClick={formik.handleSubmit}
                 isDisabled={formik.errors.amountInStock || formik.errors.name}
               >
-                Create Article
+                Update
               </Button>
             </FormControl>
           </VStack>
@@ -113,4 +120,4 @@ const AddArticle = () => {
   );
 };
 
-export default AddArticle;
+export default EditArticle;

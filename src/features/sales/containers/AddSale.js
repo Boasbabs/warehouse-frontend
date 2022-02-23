@@ -17,10 +17,10 @@ import { useEffect } from 'react';
 import { Formik, useFormik, ErrorMessage } from 'formik';
 
 import { useNavigate, Link } from 'react-router-dom';
-import { createSale } from './redux/salesThunk';
-import { SaleSubForm } from './components';
+import { createSale } from '../redux/salesThunk';
+import { SaleSubForm } from '../components';
 import { getProducts } from 'features/products/redux/productsThunk';
-import validationSchema from './validations/validationSchema';
+import validationSchema from '../validations/validationSchema';
 
 const FORM_INITIAL_VALUES = {
   name: '',
@@ -36,7 +36,7 @@ const AddSale = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { products, status } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
 
   const formik = useFormik({
     initialValues: {

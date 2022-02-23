@@ -1,2 +1,2 @@
-export { default as AddSale } from './AddSale';
-export { default as ListSales } from './ListSales';
+export { default as AddSale } from './containers/AddSale';
+export { default as ListSales } from './containers/ListSales';
