@@ -61,12 +61,12 @@ const SaleSubForm = ({ name, articles, submitFunc, isCreate }) => {
                           <Field
                             as={Input}
                             type="number"
-                            name={`articles.${index}.amountRequired`}
+                            name={`articles.${index}.amountSold`}
                           />
                           <ErrorMessage
                             component={FormHelperText}
                             style={{ color: 'red' }}
-                            name={`articles.${index}.amountRequired`}
+                            name={`articles.${index}.amountSold`}
                           />
                         </FormControl>
                       </Box>
@@ -88,7 +88,7 @@ const SaleSubForm = ({ name, articles, submitFunc, isCreate }) => {
                           icon={<FiPlus />}
                           width={'10'}
                           onClick={() =>
-                            arrayHelpers.push({ id: '', amountRequired: '' })
+                            arrayHelpers.push({ id: '', amountSold: '' })
                           }
                         />
                       </HStack>

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App';
-import { Articles, ListProducts, SingleProduct, EditProduct, AddProduct, ListSales } from 'features';
+import { Articles, ListProducts, SingleProduct, EditProduct, AddProduct, ListSales, AddSale } from 'features';
 import { NotFound } from './base-components';
 import SingleArticle from 'features/articles/SingleArticle';
 import EditArticle from 'features/articles/EditArticle';
@@ -23,6 +23,7 @@ const AppRoutes = () => {
           <Route path="/product/add" element={<AddProduct />} />
 
           <Route path="sales" element={<ListSales />} />
+          <Route path="/sale/add" element={<AddSale />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>

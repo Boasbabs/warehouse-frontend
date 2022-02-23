@@ -19,9 +19,7 @@ const SalesTable = ({ sales }) => {
         </Td>
       </Tr>
     ) : (
-      sales.map((sale) => (
-        <SalesTableRow key={sale.id} sale={sale} />
-      ))
+      sales && sales.map((sale) => <SalesTableRow key={sale.id} sale={sale} />)
     );
 
   return (

@@ -9,4 +9,4 @@ export {
 } from './products';
 
 // Sales pages
-export { ListSales } from './sales';
+export { ListSales, AddSale } from './sales';
