@@ -12,7 +12,8 @@ import {
   EditProduct,
   AddProduct,
   ListSales,
-  AddSale
+  AddSale,
+  SingleSale
 } from 'features';
 
 const AppRoutes = () => {
@@ -32,6 +33,7 @@ const AppRoutes = () => {
 
           <Route path="sales" element={<ListSales />} />
           <Route path="sale/add" element={<AddSale />} />
+          <Route path="sales/:saleId" element={<SingleSale />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
