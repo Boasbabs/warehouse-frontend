@@ -1,20 +1,17 @@
-import { Box, Container, Heading, Text, Stack } from '@chakra-ui/react';
+import { Box, Container, Heading, Text, Stack, Button } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getArticles } from './redux/articlesThunk';
+import { Link } from 'react-router-dom';
 
-import { ArticlesTable, ArticlesTableRow } from './components';
+import { ArticlesTable } from './components';
 
 const Articles = () => {
   const dispatch = useDispatch();
   const { articles, status } = useSelector((state) => state.articles);
 
-  const renderedArticles = articles.map((article) => (
-    <ArticlesTableRow key={article.id} article={article} />
-  ));
-
   useEffect(() => {
-    // dispatch(getArticles());
+    dispatch(getArticles());
   }, [dispatch]);
 
   return (
@@ -32,10 +29,18 @@ const Articles = () => {
         <Text color={'gray.600'} fontSize={'xl'}>
           {status}
         </Text>
+        <Button
+          as={Link}
+          to={`/article/add`}
+          colorScheme="blackAlpha"
+          variant={'outline'}
+          size="sm"
+        >
+          &#43; Add Articles
+        </Button>
       </Stack>
 
-      <ArticlesTable>{renderedArticles}</ArticlesTable>
-
+      <ArticlesTable articles={articles} />
     </Box>
   );
 };

@@ -12,9 +12,8 @@ import {
   Input
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
 
 import { updateArticle } from './redux/articlesThunk';
 import validationSchema from './validations/validationSchema';
