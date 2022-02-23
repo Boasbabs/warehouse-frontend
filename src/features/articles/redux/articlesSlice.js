@@ -19,6 +19,4 @@ export const articlesSlice = createSlice({
   }
 });
 
-export const { addArticle } = articlesSlice.actions;
-
 export default articlesSlice.reducer;
