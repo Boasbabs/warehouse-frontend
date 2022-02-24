@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const SalesTableRow = ({ sale }) => {
   return (
-    <Tr key={sale.id}>
+    <Tr data-testid={`sales-row-item`} key={sale.id}>
       <Td>
         <Text fontSize={{ base: '12px', lg: '14px' }} fontWeight={'500'}>
           {new Date(sale.createdAt).toDateString()}
