@@ -43,9 +43,9 @@ to generate the scaffolding for this app.
 ## Bonuses!
 
 - Notification for error or bad network request
-- Add UI tests; located in each `features/**/containers`
+- Add UI tests; located in each `features/**/containers/__tests__`
 
 ## Requirements
 
 - List the available products and quantities and the articles in each product.
-- ❗The user should be able to register a sale.
+- The user should be able to register a sale.
