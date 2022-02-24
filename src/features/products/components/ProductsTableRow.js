@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const ProductsTableRow = ({ product }) => {
   return (
-    <Tr key={product.id}>
+    <Tr data-testid={`products-row-item`} key={product.id}>
       <Td>
         <Text fontSize={{ base: '12px', lg: '14px' }} fontWeight={'500'}>
-         {product.name}
+          {product.name}
         </Text>
       </Td>
       <Td>
