@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const TableRows = ({ article }) => {
   return (
-    <Tr key={article.id}>
+    <Tr data-testid={`articles-row-item`} key={article.id}>
       <Td>
         <Text fontSize={{ base: '12px', lg: '14px' }} fontWeight={'500'}>
          {article.name}

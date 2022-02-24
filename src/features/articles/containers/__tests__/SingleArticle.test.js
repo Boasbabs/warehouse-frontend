@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   render,
-  screen,
+  screen,waitFor
 } from 'utils/test-utils';
 
 import SingleArticle from '../SingleArticle';
