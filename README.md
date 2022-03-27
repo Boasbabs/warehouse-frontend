@@ -1,4 +1,4 @@
-# Web TV Shows
+# Warehouse Frontend
 
 An application that implements a frontend for a warehouse solution’s API.
 The frontend lists the available products and quantities, and the articles in each product. The user is able to register a sale,
